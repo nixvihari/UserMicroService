@@ -7,6 +7,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -15,6 +17,7 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "user_id")
 	private Long userId;
 	
 	@Column(name = "first_name", nullable = false)
@@ -24,7 +27,8 @@ public class User {
 	private String lastName;
 	
 	@Column(nullable = false)
-	@Size(min = 10, max = 10)
+	@Min(value = 1_000_000_000L, message = "Number must be 10 digits")
+	@Max(value = 9_999_999_999L, message = "Number must be 10 digits")
 	private Long phone;
 	
 	@Column
